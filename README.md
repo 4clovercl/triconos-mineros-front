@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TriconosMineros — Mining Operations Platform
 
-## Getting Started
+Enterprise-grade SaaS frontend for real-time mining machinery monitoring and operations management.
 
-First, run the development server:
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router, TypeScript)
+- **UI**: Tailwind CSS v4 + dark mode
+- **Charts**: Apache ECharts via `echarts-for-react`
+- **State**: Zustand (persisted)
+- **i18n**: next-intl (EN / ES / PT)
+- **Animations**: Framer Motion
+- **Docker**: Multi-stage build
+
+## Features
+
+| Feature | Description |
+|---|---|
+| 🔐 Login | Mock auth with 3 roles: Admin, Operator, Viewer |
+| 🌐 i18n | EN / ES / PT — selected on login screen |
+| 🌙 Dark/Light | Toggleable theme, persisted per user |
+| 📊 Summary | KPI cards, stopped assets table, alerts timeline |
+| ⚡ Real-time | Live machine telemetry cards, auto-updates every 5s |
+| 🔬 Machine Detail | 8 telemetry cards, ECharts historical charts (1h/24h/7d/30d) |
+| 🔧 Tickets | Maintenance ticket management with auto-generated ticket badges |
+| 👥 Users (Admin) | Full user management with granular permissions panel |
+| ⚙️ Config (Admin) | Per-machine sensor threshold configuration + auto-ticket toggles |
+| 📱 Responsive | Mobile-first, collapsible sidebar, drawer on mobile |
+
+## Demo Credentials
+
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | `admin@triconos.com` | `admin123` |
+| Operator | `operator@triconos.com` | `op123` |
+| Viewer | `viewer@triconos.com` | `view123` |
+
+## Development
 
 ```bash
+cd frontend
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Docker (Production)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# From the project root
+docker compose up --build
+```
 
-## Learn More
+App runs at http://localhost:3000
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+frontend/
+  src/
+    app/[locale]/
+      login/            # Login page (all users)
+      (dashboard)/
+        summary/        # Operational summary
+        realtime/       # Live dashboard
+        machine/[id]/   # Machine detail
+        tickets/        # Maintenance tickets
+      (admin)/
+        users/          # User management
+        configurations/ # Threshold config
+    components/
+      layout/           # Sidebar, Header
+      ui/               # Reusable components
+      charts/           # ECharts wrappers
+    lib/
+      mock/             # All mock data
+      stores/           # Zustand state
+      hooks/            # useRealTimeData
+      utils/            # Permissions, formatters
+    messages/           # EN/ES/PT translations
+```
