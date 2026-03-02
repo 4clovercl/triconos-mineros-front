@@ -96,6 +96,7 @@ export default function MachineDetailPage({
   const locale = useLocale();
   const t = useTranslations("machine");
   const tAlerts = useTranslations("alerts");
+  const tMetrics = useTranslations("metrics");
   const [period, setPeriod] = useState<Period>("24h");
   const [eventFilter, setEventFilter] = useState("all");
 
@@ -127,14 +128,14 @@ export default function MachineDetailPage({
   };
 
   const metricCards: MetricCardProps[] = [
-    { label: "Engine Temp", value: `${Math.round(m.temperature)}`, unit: "°C", trend: "up", trendPct: "2%", trendColor: m.temperature > 100 ? "red" : "green" },
-    { label: "Hydraulic", value: `${Math.round(m.hydraulic)}`, unit: "bar", trend: "flat", trendPct: "0%", trendColor: "slate" },
-    { label: "Fuel Level", value: `${Math.round(m.fuel)}`, unit: "%", trend: "down", trendPct: "12%", trendColor: m.fuel < 25 ? "red" : "green" },
-    { label: "Oil Pressure", value: `${Math.round(m.oilPressure)}`, unit: "PSI", trend: "down", trendPct: "1%", trendColor: m.oilPressure < 35 ? "red" : "green" },
-    { label: "Battery", value: `${m.voltage.toFixed(1)}`, unit: "V", trend: "flat", trendPct: "0%", trendColor: "slate" },
-    { label: "RPM", value: `${Math.round(m.rpm)}`, unit: "", trend: "up", trendPct: "5%", trendColor: "green" },
-    { label: "Vibration", value: `${m.vibration.toFixed(1)}`, unit: "mm/s", trend: "up", trendPct: m.vibration > 3 ? "High" : "OK", trendColor: m.vibration > 4 ? "red" : m.vibration > 2.5 ? "amber" : "green" },
-    { label: "Payload", value: `${m.load.toFixed(1)}`, unit: "T", trend: "up", trendPct: "OK", trendColor: "green" },
+    { label: tMetrics("temperature"), value: `${Math.round(m.temperature)}`, unit: "°C", trend: "up", trendPct: "2%", trendColor: m.temperature > 100 ? "red" : "green" },
+    { label: tMetrics("hydraulic"), value: `${Math.round(m.hydraulic)}`, unit: "bar", trend: "flat", trendPct: "0%", trendColor: "slate" },
+    { label: tMetrics("fuel"), value: `${Math.round(m.fuel)}`, unit: "%", trend: "down", trendPct: "12%", trendColor: m.fuel < 25 ? "red" : "green" },
+    { label: tMetrics("oilPressure"), value: `${Math.round(m.oilPressure)}`, unit: "PSI", trend: "down", trendPct: "1%", trendColor: m.oilPressure < 35 ? "red" : "green" },
+    { label: tMetrics("voltage"), value: `${m.voltage.toFixed(1)}`, unit: "V", trend: "flat", trendPct: "0%", trendColor: "slate" },
+    { label: tMetrics("rpm"), value: `${Math.round(m.rpm)}`, unit: "", trend: "up", trendPct: "5%", trendColor: "green" },
+    { label: tMetrics("vibration"), value: `${m.vibration.toFixed(1)}`, unit: "mm/s", trend: "up", trendPct: m.vibration > 3 ? "High" : "OK", trendColor: m.vibration > 4 ? "red" : m.vibration > 2.5 ? "amber" : "green" },
+    { label: tMetrics("payload"), value: `${m.load.toFixed(1)}`, unit: "T", trend: "up", trendPct: "OK", trendColor: "green" },
   ];
 
   return (
@@ -266,8 +267,8 @@ export default function MachineDetailPage({
                 <HistoryChart
                   data1={histData.engineTemp}
                   data2={histData.fuel}
-                  label1="Engine Temp (°C)"
-                  label2="Fuel Level (%)"
+                  label1={`${tMetrics("temperature")} (°C)`}
+                  label2={`${tMetrics("fuel")} (%)`}
                   unit1="°C"
                   unit2="%"
                   alertThreshold={110}
