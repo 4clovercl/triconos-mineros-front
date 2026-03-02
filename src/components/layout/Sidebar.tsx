@@ -131,7 +131,7 @@ export function Sidebar() {
             isCollapsed && "justify-center px-2",
             "text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white"
           )}
-          title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          title={theme === "dark" ? "Cambiar a Modo Claro" : "Cambiar a Modo Oscuro"}
         >
           <span className="material-symbols-outlined text-[22px] shrink-0">
             {theme === "dark" ? "light_mode" : "dark_mode"}
@@ -145,7 +145,7 @@ export function Sidebar() {
                 transition={{ duration: 0.15 }}
                 className="overflow-hidden whitespace-nowrap"
               >
-                {theme === "dark" ? "Light Mode" : "Dark Mode"}
+                {theme === "dark" ? "Modo Claro" : "Modo Oscuro"}
               </motion.span>
             )}
           </AnimatePresence>
@@ -172,7 +172,7 @@ export function Sidebar() {
                 transition={{ duration: 0.15 }}
                 className="overflow-hidden whitespace-nowrap"
               >
-                Collapse
+                Minimizar
               </motion.span>
             )}
           </AnimatePresence>
