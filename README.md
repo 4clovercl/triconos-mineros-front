@@ -43,7 +43,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000
+Open http://localhost:3005
 
 ## Docker (Production)
 
@@ -52,7 +52,7 @@ Open http://localhost:3000
 docker compose up --build
 ```
 
-App runs at http://localhost:3000
+App runs at http://localhost:3005
 
 ## Project Structure
 
